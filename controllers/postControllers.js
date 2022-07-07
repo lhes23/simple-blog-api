@@ -32,10 +32,10 @@ const singlePostDetails = async (req, res) => {
 const updateSinglePost = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, content, img } = req.body;
+    const { title, content, featuredImg, images } = req.body;
     const post = await Post.findByIdAndUpdate(
       { _id: id },
-      { title, content, img }
+      { title, content, featuredImg, images }
     );
     return res.status(201).json({ post });
   } catch (error) {
