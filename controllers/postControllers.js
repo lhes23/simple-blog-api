@@ -12,7 +12,7 @@ const getAllPosts = async (req, res) => {
 
 const addNewPost = async (req, res) => {
   const { featuredImg } = req.files;
-  const { title, content, images } = req.body;
+  const { title, content } = req.body;
   const loc = path.join(__dirname, "..", "uploads", featuredImg.name);
 
   try {
@@ -21,7 +21,6 @@ const addNewPost = async (req, res) => {
       title,
       content,
       featuredImg: featuredImg.name,
-      images,
     });
     return res.status(201).json(newPost);
   } catch (error) {

@@ -5,7 +5,6 @@ const PostSchema = new Schema(
     title: { type: String, required: true },
     content: { type: String, required: true },
     featuredImg: { type: String },
-    images: [{ type: String }],
   },
   { timestamps: true }
 );
