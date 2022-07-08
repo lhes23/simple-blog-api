@@ -1,4 +1,5 @@
 const Post = require("../models/postModels");
+const path = require("path");
 
 const getAllPosts = async (req, res) => {
   try {
@@ -10,9 +11,17 @@ const getAllPosts = async (req, res) => {
 };
 
 const addNewPost = async (req, res) => {
-  const { title, content, featuredImg, images } = req.body;
+  const { featuredImg } = req.files;
+  const { title, content } = req.body;
+  const loc = path.join(__dirname, "..", "uploads", featuredImg.name);
+
   try {
-    const newPost = await Post.create({ title, content, featuredImg, images });
+    featuredImg.mv(loc);
+    const newPost = await Post.create({
+      title,
+      content,
+      featuredImg: featuredImg.name,
+    });
     return res.status(201).json(newPost);
   } catch (error) {
     return res.status(401).json({ error });
